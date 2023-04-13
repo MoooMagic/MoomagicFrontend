@@ -71,7 +71,7 @@ function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');
-  const [message, setMessage] = useState('');
+  const [description, setDescritption] = useState('');
   const [emailError, setEmailError] = useState('');
 
 
@@ -94,7 +94,7 @@ function ContactForm() {
   };
 
   const handleMessageChange = (event) => {
-    setMessage(event.target.value);
+    setDescritption(event.target.value);
   };
 
   const handleSubmit = (event) => {
@@ -103,7 +103,7 @@ function ContactForm() {
       name,
       email,
       subject,
-      message
+      description
     }).then((response) => {
       console.log(response);
     }).catch((error) => {
