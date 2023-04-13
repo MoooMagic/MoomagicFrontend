@@ -99,7 +99,7 @@ function ContactForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('https://moomagicapi/api/user/contactus', {
+    axios.post('https://moomagicapi.onrender.com/api/user/contactus', {
       name,
       email,
       subject,

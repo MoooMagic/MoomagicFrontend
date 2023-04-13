@@ -49,7 +49,7 @@ const Profile = (props) => {
         }
         else {
             props.loading.setLoading = (true);
-            axios.get(`https://moomagicapi/api/auth/user/${user}`, {
+            axios.get(`https://moomagicapi.onrender.com/api/auth/user/${user}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

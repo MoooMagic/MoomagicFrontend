@@ -16,7 +16,7 @@ function SignIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    axios.post('https://moomagicapi/api/auth/login', { email, password })
+    axios.post('https://moomagicapi.onrender.com/api/auth/login', { email, password })
     .then((res) => {
       console.log(res);
       localStorage.setItem('token', res.data.acessToken);

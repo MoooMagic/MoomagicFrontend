@@ -40,7 +40,7 @@ const Cart = (props) => {
             navigate('/login')
         } else {
             props.loading.setLoading(true);
-            axios.get('https://moomagicapi/api/cart/getcart', {
+            axios.get('https://moomagicapi.onrender.com/api/cart/getcart', {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -55,7 +55,7 @@ const Cart = (props) => {
         if (cartProd.length > 0) {
             const token = localStorage.getItem('token')
             if (token) {
-                axios.get('https://moomagicapi/api/cart/getcart', {
+                axios.get('https://moomagicapi.onrender.com/api/cart/getcart', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -75,7 +75,7 @@ const Cart = (props) => {
 
     const deleteAllCartProduct = () => {
         const token = localStorage.getItem('token')
-        axios.delete('https://moomagicapi/api/cart/removecart', {
+        axios.delete('https://moomagicapi.onrender.com/api/cart/removecart', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -95,7 +95,7 @@ const Cart = (props) => {
             const userId=localStorage.getItem('userid')
             const token = localStorage.getItem('token')
           try {
-            const res = await axios.get(`https://moomagicapi/api/auth/user/${userId}`,
+            const res = await axios.get(`https://moomagicapi.onrender.com/api/auth/user/${userId}`,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -111,7 +111,7 @@ const Cart = (props) => {
       }, []);
     const createorder = () => {
         const products = JSON.stringify(cartProd)
-        axios.post('https://moomagicapi/api/razorpay/createorder',{
+        axios.post('https://moomagicapi.onrender.com/api/razorpay/createorder',{
             amount:totalprice.price,
             currency:'INR',
             receipt:'receipt#1',
@@ -122,7 +122,7 @@ const Cart = (props) => {
             handlePayment(res.data.data)
             const deleteorder = () => {
                 const token = localStorage.getItem('token')
-                axios.delete('https://moomagicapi/api/cart/removecart', {
+                axios.delete('https://moomagicapi.onrender.com/api/cart/removecart', {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -159,7 +159,7 @@ const Cart = (props) => {
             image:'',
             
             handler:function(response){
-                axios.post('https://moomagicapi/api/razorpay/verify',{
+                axios.post('https://moomagicapi.onrender.com/api/razorpay/verify',{
                     razorpay_order_id: response.razorpay_order_id,
     razorpay_payment_id: response.razorpay_payment_id,
     razorpay_signature: response.razorpay_signature

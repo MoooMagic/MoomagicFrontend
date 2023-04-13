@@ -41,7 +41,7 @@ const ProductPage = (props) => {
     // Use Effect For Find Perticular Product
     useEffect(() => {
         props.loading.setLoading(true);
-        axios.get(`https://moomagicapi/api/product/productid/${id}`)
+        axios.get(`https://moomagicapi.onrender.com/api/product/productid/${id}`)
             .then(res => {
                 setsingleProduct(res.data)
                 props.loading.setLoading(false);
@@ -64,7 +64,7 @@ const ProductPage = (props) => {
             })
             navigate('/login')
         } else {
-            axios.post('https://moomagicapi/api/cart/addcart', {
+            axios.post('https://moomagicapi.onrender.com/api/cart/addcart', {
                 products: [{
                     product_id: id,
                     product_name: singleProduct.product_name || '',

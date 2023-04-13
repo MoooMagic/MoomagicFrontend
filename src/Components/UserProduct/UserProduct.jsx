@@ -28,7 +28,7 @@ const UserProduct = (props) => {
     }
     else {
       props.loading.setLoading(true);
-      axios.get(`https://moomagicapi/api/product/productbyuser/${userid}`, {
+      axios.get(`https://moomagicapi.onrender.com/api/product/productbyuser/${userid}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

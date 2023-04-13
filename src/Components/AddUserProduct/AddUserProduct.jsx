@@ -31,7 +31,7 @@ const AddUserProduct = () => {
   // console.log(token);
   const uploadProduct = () => {
     if (addProduct.product_img !== "" && addProduct.product_name !== "" && addProduct.product_desc !== "" && addProduct.price !== 0 && addProduct.quantity !== "") {
-      axios.post('https://moomagicapi/api/product/addproduct', addProduct, {
+      axios.post('https://moomagicapi.onrender.com/api/product/addproduct', addProduct, {
         headers: {
           'Authorization': `Bearer ${token}`,
         }

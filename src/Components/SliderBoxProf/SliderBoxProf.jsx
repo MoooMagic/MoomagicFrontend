@@ -37,7 +37,7 @@ const SliderBoxProf = () => {
         const user = localStorage.getItem('userid');
         //const userid=user.replace(/['"]+/g, '');
         if (token && user) {
-            axios.get(`https://moomagicapi/api/auth/user/${user}`, {
+            axios.get(`https://moomagicapi.onrender.com/api/auth/user/${user}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

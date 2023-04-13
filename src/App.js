@@ -43,7 +43,7 @@ function App() {
   useEffect(() => {
     async function fetchallproducts() {
       try {
-        const res = await axios.get("https://moomagicapi/api/product/allproducts")
+        const res = await axios.get("https://moomagicapi.onrender.com/api/product/allproducts")
         setAllProdList(res.data)
         setLoading(false);
       } catch (error) {

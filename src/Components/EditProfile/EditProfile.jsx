@@ -21,7 +21,7 @@ const EditProfile = () => {
             return window.location.href = "/signin";
         }
         else {
-            axios.get(`https://moomagicapi/api/auth/user/${user}`, {
+            axios.get(`https://moomagicapi.onrender.com/api/auth/user/${user}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -75,7 +75,7 @@ const EditProfile = () => {
                 return window.location.href = "/signin";
             }
             e.preventDefault();
-            axios.put(`https://moomagicapi/api/auth/${userid}`, userdata, {
+            axios.put(`https://moomagicapi.onrender.com/api/auth/${userid}`, userdata, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

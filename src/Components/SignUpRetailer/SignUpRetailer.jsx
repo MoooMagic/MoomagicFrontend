@@ -22,7 +22,7 @@ const SignUpRetailer = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    axios.post('https://moomagicapi/api/auth/register', formData)
+    axios.post('https://moomagicapi.onrender.com/api/auth/register', formData)
       .then((res) => {
         console.log(res);
         window.location.href = "/SignIn";
