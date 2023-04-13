@@ -24,8 +24,8 @@ function SignUpSeller() {
     event.preventDefault();
     axios.post('https://moomagicapi.onrender.com/api/auth/register', formData)
     .then((res) => {
-      console.log(res);
-      window.location.href = "/SignIn";
+      console.log('success');
+      window.location.href = "/signin";
     })
     .catch((err) => {
       console.log(err);
