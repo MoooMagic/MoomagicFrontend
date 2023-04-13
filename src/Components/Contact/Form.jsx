@@ -93,7 +93,7 @@ function ContactForm() {
     setSubject(event.target.value);
   };
 
-  const handleMessageChange = (event) => {
+  const handledescriptionChange = (event) => {
     setDescritption(event.target.value);
   };
 
@@ -109,7 +109,7 @@ function ContactForm() {
     }).catch((error) => {
       console.log(error);
     });
-    console.log(`Email: ${email}\nSubject: ${subject}\nMessage: ${message}`);
+    console.log(`Email: ${email}\nSubject: ${subject}\ndescription: ${description}`);
   };
 
   return (
@@ -130,9 +130,9 @@ function ContactForm() {
         <input type="text" id="subject" placeholder='Subject' value={subject} onChange={handleSubjectChange} required />
       </FormGroup>
       <FormGroup>
-        <label htmlFor="message">Your Message</label>
-        <textarea id="message" placeholder='Give a brief description' rows={3} value={message} onChange={handleMessageChange} maxLength={2500} required />
-        <CharacterCount>{message.length} / 2500 characters</CharacterCount>
+        <label htmlFor="description">Your description</label>
+        <textarea id="description" placeholder='Give a brief description' rows={3} value={description} onChange={handledescriptionChange} maxLength={2500} required />
+        <CharacterCount>{description.length} / 2500 characters</CharacterCount>
       </FormGroup>
       <SubmitButton type="submit">Submit</SubmitButton>
     </FormWrapper>
