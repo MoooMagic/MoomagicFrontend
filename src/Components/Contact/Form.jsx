@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const FormWrapper = styled.form`
   display: flex;
@@ -105,9 +106,19 @@ function ContactForm() {
       subject,
       description
     }).then((response) => {
-      console.log(response);
+      Swal.fire({
+        title: 'Success!',
+        text: 'Your message has been sent.',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      });
     }).catch((error) => {
-      console.log(error);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Something went wrong. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'Ok'
+      });
     });
     console.log(`Email: ${email}\nSubject: ${subject}\ndescription: ${description}`);
   };
