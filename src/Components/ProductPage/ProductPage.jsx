@@ -93,7 +93,7 @@ const ProductPage = (props) => {
     return (
         <>
             <div className="productPagePer">
-                <Loader loading={props.loading.loading} />
+               
                 {
                     singleProduct && (
                         <div className="container">
