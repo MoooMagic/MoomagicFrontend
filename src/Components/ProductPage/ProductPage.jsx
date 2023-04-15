@@ -37,6 +37,7 @@ const ProductPage = (props) => {
 
     // Use State for Per Product
     const [singleProduct, setsingleProduct] = useState(null)
+    const [user, setUser] = useState(null);
 
     // Use Effect For Find Perticular Product
     useEffect(() => {
@@ -88,7 +89,101 @@ const ProductPage = (props) => {
             })
 
         }
+    };
+    useEffect(() => {
+        const fetchUser = async () => {
+            const userId=localStorage.getItem('userid')
+            const token = localStorage.getItem('token')
+          try {
+            const res = await axios.get(`https://moomagicapi.onrender.com/api/auth/user/${userId}`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            const { name, email, phonenumber } = res.data;
+            setUser({ name, email, phonenumber });
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        fetchUser();
+      }, []);
+    const createorder = () => {
+        const products = JSON.stringify(cartProd)
+        axios.post('https://moomagicapi.onrender.com/api/razorpay/createorder',{
+            amount:singleProduct.price,
+            currency:'INR',
+            receipt:'receipt#1',
+            notes:{
+                products:"Products"
+            }
+        }).then(res=>{
+            handlePayment(res.data.data)
+                Swal.fire({
+                icon: 'success',
+                title: 'Order Created',
+                text: 'Order Created Successfully',
+            })
+           
+        }).catch(err=>{
+            console.log(err)
+            Swal.fire({
+                icon: 'error',
+                title: 'Server Error',
+                description: 'Server Error',
+            })})
     }
+
+    const handlePayment = (data) => {
+        const options = {
+            key:process.env.KEY,
+            amount:data.amount,
+            currency:data.currency,
+            order_id:data.id,
+            name:'MooMagic',
+            description:'Indias Own Dairy Farm',
+            image:'',
+            
+            handler:function(response){
+                axios.post('https://moomagicapi.onrender.com/api/razorpay/verify',{
+                    razorpay_order_id: response.razorpay_order_id,
+    razorpay_payment_id: response.razorpay_payment_id,
+    razorpay_signature: response.razorpay_signature
+                })
+                .then(res=>{
+                    if(res.data.status === '200'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Payment Success',
+                            text: 'Payment Successfull',
+                        })}
+                        else if(res.data.status === '400'){
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Payment Failed',
+                                text: 'Payment Failed',
+                            })
+                        }
+                }).catch(err=>{
+                    console.log(err)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Server Error',
+                })})
+            },
+            prefill:{
+                name:user.name,
+                email:user.email,
+                contact:user.phonenumber
+            },
+            theme:{
+                color:'#3399cc'
+            },
+        };
+        const rzp1 = new window.Razorpay(options);
+        rzp1.open();
+    };
 
     return (
         <>
@@ -106,7 +201,7 @@ const ProductPage = (props) => {
 
                                     <div className="buttonPro">
                                         {
-                                            singleProduct.createdBy === localStorage.getItem("userid") ? <></> : <button className='btn btn-outline-primary'> <FlashOnIcon /> Buy Now</button>
+                                            singleProduct.createdBy === localStorage.getItem("userid") ? <></> : <button className='btn btn-outline-primary' onClick={createorder}> <FlashOnIcon /> Buy Now</button>
                                         }
                                         {
                                             singleProduct.createdBy === localStorage.getItem("userid") ? <></> : <button className='btn btn-success' onClick={addToCart}><ShoppingCartIcon /> Add to Cart</button>
