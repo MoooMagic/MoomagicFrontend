@@ -110,13 +110,13 @@ const ProductPage = (props) => {
         fetchUser();
       }, []);
     const createorder = () => {
-        const products = JSON.stringify(cartProd)
+        const products = JSON.stringify(singleProduct.product_name)
         axios.post('https://moomagicapi.onrender.com/api/razorpay/createorder',{
             amount:singleProduct.price,
             currency:'INR',
             receipt:'receipt#1',
             notes:{
-                products:"Products"
+                products:products
             }
         }).then(res=>{
             handlePayment(res.data.data)
